@@ -19,19 +19,11 @@ Features
 
 Plots a single event on a pitch, including visible area and freeze-frame positions of players.
 
-python
-
-CopyEdit
-
 `plot_event_with_360(event_row)`
 
 ### 2\. **Action Chain Visualization**
 
 Generates a table and pitch plot for a sequence of actions (passes, carries, shots, etc.) leading up to a key moment.
-
-python
-
-CopyEdit
 
 `plot_action_chain_by_id(df_model, SCENARIO)`
 
@@ -45,19 +37,12 @@ Creates an animated pitch plot of action sequences with:
 
 -   Dynamic predicted goal/concede probabilities
 
-python
-
-CopyEdit
-
 `animate_action_chain(df_model, SCENARIO, save_path='action_chain_animation.mp4')`
 
 ### 4\. **Team (or Player) Goal Probability Heatmap**
 
 Creates a pitch heatmap showing areas from which actions resulted in high predicted probabilities of scoring.
 
-python
-
-CopyEdit
 
 `plot_team_goal_prob_heatmap(team_id, player_id=None)`
 
@@ -87,9 +72,6 @@ Requirements
 
 Install dependencies with:
 
-bash
-
-CopyEdit
 
 `pip install pandas matplotlib mplsoccer numpy cmasher`
 
