@@ -34,9 +34,6 @@ We use a variety of features to estimate the probabilities in the model:
 - **Goalkeeper Distance to Goal:** the distance of the opponents / own goalkeeper to the goal
 - **Goalkeeper in Shooting Triangle:** whether or not the opponents / own goalkeepeer is in the triangle between the ball and posts
 
-
-
-
 Labels
 --------------------
 
@@ -45,7 +42,13 @@ For probability estimation we label the 10 actions previous to a goal. Actions f
 Model
 --------------------
 
-We use an XGBoost classifier to estimate the scoring and conceding probabilities given the features.
+We use an XGBoost classifier to estimate the scoring and conceding probabilities given the features. The model outputs the following:
+
+-   `predicted_goal_prob`: Probability of scoring from the event.
+
+-   `predicted_concede_prob`: Probability the team concedes after the event.
+
+-   `action_value`: Estimated contribution of the action to the overall chance of scoring.
 
 Project Structure and Setup
 ================================================
@@ -62,24 +65,37 @@ The files in the project are required to be run in the following order:
     Trains the model, estimates the probabilities, computes action values and stores the data in `data_cleaned_trained.pkl`.
 
 -   `3_Result_Visualization.ipynb`\
-    Visualizes the model results and shows various potential applications.
+    Visualizes the model results and shows various potential applications with examples.
 
 Applications
 -----------
 
-### 1\. **Event Snapshot Plotting**
+### 1\. **Player Ratings**
+
+The model can rate all players in the dataset by their action value per 90 minutes.
+
+<img width="295" alt="image" src="https://github.com/user-attachments/assets/6a70b6e3-badc-4356-b10e-aff1456e7c19" />
+
+![image](https://github.com/user-attachments/assets/131cabbe-66ad-4bf2-9bcf-2fe580ff5c21)
+
+### 2\. **Event Snapshot Plotting**
 
 Plots a single event on a pitch, including visible area and freeze-frame positions of players.
 
+![image](https://github.com/user-attachments/assets/b3d1c34e-fd99-42c4-8d78-d7d8b0300263)
+
+
 `plot_event_with_360(event_row)`
 
-### 2\. **Action Chain Visualization**
+### 3\. **Action Chain Visualization**
 
 Generates a table and pitch plot for a sequence of actions (passes, carries, shots, etc.) leading up to a key moment.
 
+![image](https://github.com/user-attachments/assets/2c40fbb9-4efc-40b2-b102-d1ed3ce9405b)
+
 `plot_action_chain_by_id(df_model, SCENARIO)`
 
-### 3\. **Action Chain Animation**
+### 4\. **Action Chain Animation**
 
 Creates an animated pitch plot of action sequences with:
 
@@ -89,25 +105,20 @@ Creates an animated pitch plot of action sequences with:
 
 -   Dynamic predicted goal/concede probabilities
 
+https://github.com/user-attachments/assets/8a7ead33-ba92-45cd-ae5e-028421edd40a
+
+
+
+
 `animate_action_chain(df_model, SCENARIO, save_path='action_chain_animation.mp4')`
 
-### 4\. **Team (or Player) Goal Probability Heatmap**
+### 5\. **Team (or Player) Goal Probability Heatmap**
 
 Creates a pitch heatmap showing areas from which actions resulted in high predicted probabilities of scoring.
 
+![image](https://github.com/user-attachments/assets/5d4cc1e4-3095-47cb-9980-37e4c7b56e59)
 
 `plot_team_goal_prob_heatmap(team_id, player_id=None)`
-
-Model Output
----------------
-
-The model enriches each event in the dataset with:
-
--   `predicted_goal_prob`: Probability of scoring from the event.
-
--   `predicted_concede_prob`: Probability the team concedes after the event.
-
--   `action_value`: Estimated contribution of the action to the overall chance of scoring.
 
 Requirements
 ---------------
@@ -133,10 +144,3 @@ Install dependencies with:
 
 
 `pip install pandas matplotlib mplsoccer numpy cmasher sklearn xgboost collections`
-
-
--   Use valid event IDs to visualize specific game sequences. For example:
-
-    -   `"57c5911b-9d18-4c11-8975-c73e81ed0940"` for *Cameroon vs Brazil*
-
-    -   `"17949ad2-d653-49cb-95e4-2efe585438dc"` for *Japan Comeback*
