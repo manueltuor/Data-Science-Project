@@ -3,6 +3,8 @@ Valuing Players Actions in Football
 
 This data science project aims to value all football player actions on the pitch. This provides a better view over how different actions contribute to goals, since most models only consider single actions or shots. This project builds up on the paper [Actions Speak Louder than Goals](https://dl.acm.org/doi/pdf/10.1145/3292500.3330758) by Decroos et al. 2019 and the corresponding [Github repository](https://github.com/ML-KULeuven/socceraction). Some ideas were also inspired by Statsbombs [On Ball Value](https://statsbomb.com/news/introducing-on-ball-value-obv/) metric.
 
+The entire code for the project can also be found in this [Github repository](https://github.com/manueltuor/Data-Science-Project).
+
 General Idea
 --------------------
 
